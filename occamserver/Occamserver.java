@@ -39,7 +39,7 @@ public class Occamserver implements Runnable, Closeable{
 			Map out = new HashMap();
 			out.put("firstLine", "HTTP/1.1 200 OK");
 			//byte[] or String
-			out.put("content", "Occamserver. Time: "+System.currentTimeMillis()*.001+" seconds");
+			out.put("content", "Occamserver. Time: "+System.currentTimeMillis()*.001+" seconds. Map received: "+in);
 			return out;
 		}
 	};
@@ -115,7 +115,7 @@ public class Occamserver implements Runnable, Closeable{
 						OutputStream out = null;
 						try{
 							byte bytesIn[] = readFully(s.getInputStream(), maxBytesPerRequest, maxSecondsReceivingRequest);
-							System.out.println("bytesInAsString["+new String(bytesIn,"UTF-8")+"]");
+							//System.out.println("bytesInAsString["+new String(bytesIn,"UTF-8")+"]");
 							byte bytesOut[] = func.call(bytesIn);
 							//byte bytesOut[] = func.func(null);
 							out = s.getOutputStream();
@@ -167,7 +167,7 @@ public class Occamserver implements Runnable, Closeable{
 			int nextByte = in.read();
 			if(nextByte == -1) break;
 			b[siz++] = (byte)nextByte;
-			System.out.print((char)nextByte);
+			//System.out.print((char)nextByte);
 			double duration = (System.nanoTime()-nanoStart)*1e-9;
 			if(maxSeconds < duration) throw new IOException("Took longer than "+maxSeconds+" seconds");
 			boolean isGet = 3<=siz && (b[0]=='G' && b[1]=='E' && b[2]=='T');
