@@ -1,7 +1,7 @@
 # occamserver
 Minimalist server wrapping your func of bytes or map in and out
 
-new Thread(new Occamserver(new MapFunc(
+new Thread(new Occamserver(new MapFunc(){
 
 	public Map call(Map in){
 	
@@ -19,7 +19,7 @@ new Thread(new Occamserver(new MapFunc(
 		
 	}
 	
-))).start();
+})).start();
 
 Then go to http://localhost
 
